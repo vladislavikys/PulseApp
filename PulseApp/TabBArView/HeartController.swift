@@ -7,31 +7,63 @@
 
 import UIKit
 
-class HeartController: UITabBarController {
+class HeartController: UIViewController {
+    
     private var backgroundImageView: UIImageView!
     private var pulseAndStackView: UIStackView!
+    private var fingerLabel: UILabel!
     private var pulseLabel: UILabel!
     private var heartAndBpmStackView: UIStackView!
     private var heartImageView: UIImageView!
     private var bpmLabel: UILabel!
-    private var circleContainerView: UIView!
     private var circleImageView: UIImageView!
-    private var startButton: UIButton!
+    private var startButton : UIButton!
+    private var headerStackView: UIStackView!
+    private var headerLabel: UILabel!
+    private var infoButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.view.backgroundColor = .white
+        
+        startButton = UIButton(type: .system)
+        startButton.setTitle("Continue", for: .normal)
+        startButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        startButton.backgroundColor = .black
+        startButton.layer.cornerRadius = 30
+        startButton.backgroundColor = #colorLiteral(red: 0.4392156863, green: 0.4, blue: 0.9764705882, alpha: 1)
+        startButton.setTitleColor(UIColor.white, for: .normal)
+        startButton.translatesAutoresizingMaskIntoConstraints = false
+        startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
+        view.addSubview(startButton)
+        
         // Настройка изображения-фона
         backgroundImageView = UIImageView(image: UIImage(named: "vcCircle"))
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(backgroundImageView)
+        
+        // Новые элементы
+        headerStackView = UIStackView()
+        headerStackView.axis = .horizontal
+        headerStackView.spacing = 10
+        headerStackView.alignment = .center
+        headerStackView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(headerStackView)
+        
+        headerLabel = UILabel()
+        headerLabel.text = "Heart rate"
+        headerLabel.font = UIFont.boldSystemFont(ofSize: 28)
+        headerLabel.translatesAutoresizingMaskIntoConstraints = false
+        headerStackView.addArrangedSubview(headerLabel)
+        
+        infoButton = UIButton(type: .system)
+        infoButton.setImage(UIImage(named: "infoIcon"), for: .normal)
+        infoButton.translatesAutoresizingMaskIntoConstraints = false
+        infoButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        infoButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        headerStackView.addArrangedSubview(infoButton)
+        infoButton.addTarget(self, action: #selector(infoButtonTapped), for: .touchUpInside)
 
-        // Создаем UIView для круглого изображения
-        circleContainerView = UIView()
-        circleContainerView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(circleContainerView)
 
         // Настройка горизонтального стека для pulseLabel и heartAndBpmStackView
         pulseAndStackView = UIStackView()
@@ -40,6 +72,13 @@ class HeartController: UITabBarController {
         pulseAndStackView.alignment = .center
         pulseAndStackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(pulseAndStackView)
+        
+        fingerLabel = UILabel()
+        fingerLabel.text = "No finger"
+        fingerLabel.font = UIFont.systemFont(ofSize: 16)
+        fingerLabel.textAlignment = .center
+        fingerLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(fingerLabel)
 
         // Настройка метки для отображения частоты пульса
         pulseLabel = UILabel()
@@ -69,28 +108,12 @@ class HeartController: UITabBarController {
         bpmLabel.font = UIFont.systemFont(ofSize: 16)
         bpmLabel.textAlignment = .center
         heartAndBpmStackView.addArrangedSubview(bpmLabel)
-
-        // Настройка кнопки "Start" с закругленными краями
-        startButton = UIButton(type: .system)
-        startButton.setTitle("Start", for: .normal)
-        startButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 26)
-        startButton.layer.cornerRadius = 35
-        //startButton.backgroundColor = #colorLiteral(red: 0.44, green: 0.4, blue: 0.98, alpha: 1)
-        startButton.tintColor = .black
-        startButton.setTitleColor(UIColor.white, for: .normal)
-        startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
-        view.addSubview(startButton)
-
-        // Настройка изображения круга
-        circleImageView = UIImageView(image: UIImage(named: "yourCircleImage")) // Замените "yourCircleImage" на название вашего изображения
-        circleImageView.contentMode = .scaleAspectFit
-        circleImageView.translatesAutoresizingMaskIntoConstraints = false
-        circleContainerView.addSubview(circleImageView)
-
+        
         // Расстановка элементов на экране
         setupConstraints()
     }
 
+    
     func setupConstraints() {
         NSLayoutConstraint.activate([
             // Установка размеров изображения-фона
@@ -98,35 +121,34 @@ class HeartController: UITabBarController {
             backgroundImageView.heightAnchor.constraint(equalToConstant: 215),
             backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             backgroundImageView.centerYAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height / 2.25),
+            
+            // Установка положения горизонтального стека вверху экрана
+            headerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
+            headerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
+            headerStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 70),
+            
+            fingerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            fingerLabel.bottomAnchor.constraint(equalTo: backgroundImageView.topAnchor, constant: -25),
 
             // Установка положения горизонтального стека (pulseLabel и heartAndBpmStackView) по центру экрана
-            pulseAndStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pulseAndStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
-
-            // Установка положения UIView для круглого изображения по центру pulseAndStackView
-            circleContainerView.centerXAnchor.constraint(equalTo: pulseAndStackView.centerXAnchor),
-            circleContainerView.centerYAnchor.constraint(equalTo: pulseAndStackView.centerYAnchor),
-            // Установка размеров UIView для круглого изображения
-            circleContainerView.widthAnchor.constraint(equalToConstant: 50),
-            circleContainerView.heightAnchor.constraint(equalToConstant: 50),
-
-            // Установка размеров изображения круга внутри UIView
-            circleImageView.leadingAnchor.constraint(equalTo: circleContainerView.leadingAnchor),
-            circleImageView.trailingAnchor.constraint(equalTo: circleContainerView.trailingAnchor),
-            circleImageView.topAnchor.constraint(equalTo: circleContainerView.topAnchor),
-            circleImageView.bottomAnchor.constraint(equalTo: circleContainerView.bottomAnchor),
-
-            // Установка положения кнопки "Start" по центру экрана и внизу от верхнего края
+            pulseAndStackView.centerXAnchor.constraint(equalTo: backgroundImageView.centerXAnchor),
+            pulseAndStackView.centerYAnchor.constraint(equalTo: backgroundImageView.centerYAnchor),
+            
             startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            startButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150),
+            startButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
             startButton.widthAnchor.constraint(equalToConstant: 300),
-            startButton.heightAnchor.constraint(equalToConstant: 70),
+            startButton.heightAnchor.constraint(equalToConstant: 68)
+
         ])
     }
-
+    
     @objc func startButtonTapped() {
-        let pulseRate = Int.random(in: 1...149)
-        pulseLabel.text = "\(pulseRate)"
+        let aboutMeVC = AboutMeViewController()
+        aboutMeVC.modalPresentationStyle = .fullScreen
+        present(aboutMeVC, animated: true, completion: nil)
+    }
+    
+    @objc func infoButtonTapped() {
+        print("Info button tapped")
     }
 }
-

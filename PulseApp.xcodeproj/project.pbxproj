@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F5BA5F4D2B18D64F00A027EC /* AboutMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BA5F4C2B18D64F00A027EC /* AboutMeViewController.swift */; };
 		F5E6C7942B1782D500C35FE7 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E6C7932B1782D500C35FE7 /* MainTabBarController.swift */; };
 		F5E6C7962B1782F600C35FE7 /* HeartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E6C7952B1782F600C35FE7 /* HeartController.swift */; };
 		F5E6C7982B17832200C35FE7 /* HistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E6C7972B17832200C35FE7 /* HistoryController.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F5BA5F4C2B18D64F00A027EC /* AboutMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutMeViewController.swift; sourceTree = "<group>"; };
 		F5E6C7932B1782D500C35FE7 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		F5E6C7952B1782F600C35FE7 /* HeartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartController.swift; sourceTree = "<group>"; };
 		F5E6C7972B17832200C35FE7 /* HistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryController.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				F5F8673D2B170B8C0096AAEE /* ViewController.swift */,
+				F5BA5F4C2B18D64F00A027EC /* AboutMeViewController.swift */,
 				F5E6C7992B17832C00C35FE7 /* TabBArView */,
 				F5F867422B170B8D0096AAEE /* Assets.xcassets */,
 				F5E6C79A2B17833E00C35FE7 /* Support files */,
@@ -298,6 +301,7 @@
 				F5E6C79E2B17836A00C35FE7 /* TestController.swift in Sources */,
 				F5E6C7942B1782D500C35FE7 /* MainTabBarController.swift in Sources */,
 				F5E6C7A02B17837400C35FE7 /* ProfileController.swift in Sources */,
+				F5BA5F4D2B18D64F00A027EC /* AboutMeViewController.swift in Sources */,
 				F5F8673C2B170B8C0096AAEE /* SceneDelegate.swift in Sources */,
 				F5E6C7982B17832200C35FE7 /* HistoryController.swift in Sources */,
 				F5E6C7962B1782F600C35FE7 /* HeartController.swift in Sources */,
