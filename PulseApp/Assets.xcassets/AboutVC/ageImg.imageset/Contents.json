@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "ageImg.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "NoSelectDietTabBar.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

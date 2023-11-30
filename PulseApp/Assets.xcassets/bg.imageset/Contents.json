@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "bg.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "SelectHeartTabBar.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
